@@ -1,24 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import AppRoutes from "./pages";
+import "./assets/App.css";
+import { BrowserRouter, Link } from "react-router-dom";
+import RestorantsContext from "./context/RestorantsContext";
+import { useState } from "react";
 
 function App() {
+  const [list, setList] = useState([]);
+  const [mapOption, setMapOption] = useState({ coords: null, title: '' });
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <RestorantsContext.Provider value={{ list, setList, mapOption, setMapOption }}>
+      <BrowserRouter>
+        <header>
+          <Link to="/">Restorants</Link>
+        </header>
+        <main>
+          <AppRoutes />
+        </main>
+      </BrowserRouter>
+    </RestorantsContext.Provider>
   );
 }
 
